@@ -440,6 +440,9 @@ input:focus{
     .wp-filter-product {
         display: none;
     }
+    .btn-submit-filter-mobile {
+        display: block !important;
+    }
 }
 
 /* --------cart-item------------ */
@@ -753,4 +756,29 @@ form a{
 
 .col-mini {
     flex-basis: 20%;
+}
+
+.btn-submit-filter-mobile {
+    background: #ff523b;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 1rem;
+    border: unset;
+    width: 20%;
+    display: none;
+}
+
+.wp-filter-product-mobile-parent {
+    width: 100%;
+    text-align: right;
+    /*display: none;*/
+    /*display: inline-block;*/
+}
+
+.wp-filter-product-mobile {
+    /*display: none;*/
+    display: inline-block;
+}
+.wp-filter-product-mobile .box-filter {
+    text-align: left;
 }

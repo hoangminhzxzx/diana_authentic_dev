@@ -1,0 +1,42 @@
+.card-product-hot {
+    width: 15%;
+    box-shadow: 1px 1px 5px 0px;
+    position: relative;
+}
+
+.hot-position {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: tomato;
+    color: #fff;
+    cursor: pointer;
+    padding: 2px 9px;
+}
+
+.btn-select-diana {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#accordionSidebar {
+    position: fixed;
+    background-color: #fcd1bf !important;
+    background-image: linear-gradient(180deg,#ef9d9d 10%,#000 100%) !important;
+}
+#content-wrapper {
+    margin-left: 14rem !important;
+}
+
+#content-wrapper #content {
+    min-height: 650px;
+}
+
+#content {
+    background-image: linear-gradient(150deg,#f4e6e6 10%,#f4b8b8 100%) !important;
+}
+
+#content nav.navbar.topbar {
+    background-image: linear-gradient(270deg,#f4e6e6 10%,#f4b8b8 100%) !important;
+}

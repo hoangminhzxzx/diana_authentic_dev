@@ -1,0 +1,1 @@
+[05-Nov-2021 12:58:56 UTC] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 175549576 bytes) in /home/wbytoxunhosting/public_html/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 121

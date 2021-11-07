@@ -1,4 +1,4 @@
-const url_source = 'http://localhost/diana_authentic_dev/';
+const url_source = 'http://localhost/diana_authentic_dev';
 
 // function showLoading(selector) {
 //     let loading = document.createElement('span');

@@ -93,8 +93,12 @@ class ProductController extends Controller
             // Filename to store
             $fileNameToStore = $filename.'-'.self::quickRandom().'.'.$extension;
             // Upload Image
-            $path = $request->file('thumbnail')->storeAs('public/uploads', $fileNameToStore);
-            $path = $this->changePathUpload($path);
+//            $path = $request->file('thumbnail')->storeAs('public/uploads', $fileNameToStore);
+//            $path = $this->changePathUpload($path);
+
+            $path = $request->file('thumbnail')->move(public_path().'/storage/uploads/', $fileNameToStore);
+            $path = $this->changePathUploadLocal($path->getFilename());
+
             //move
 //            $request->file('thumbnail')->move(public_path('uploads'),$fileNameToStore);
         }
@@ -122,7 +126,7 @@ class ProductController extends Controller
         if ($product) {
             $categories = Category::query()->where('parent_id', "!=", 0)->get(['id','title']);
             $category_accessory = Category::query()->where('title', 'LIKE', "%Phu kien%")->first();
-			
+
             return view('admin.product.edit',
                 [
                     'product' => $product,
@@ -162,8 +166,10 @@ class ProductController extends Controller
             // Filename to store
             $fileNameToStore = $filename.'-'.self::quickRandom().'.'.$extension;
             // Upload Image
-            $path = $request->file('thumbnail')->storeAs('public/uploads', $fileNameToStore);
-            $path = $this->changePathUpload($path);
+//            $path = $request->file('thumbnail')->storeAs('public/uploads', $fileNameToStore);
+
+            $path = $request->file('thumbnail')->move(public_path().'/storage/uploads/', $fileNameToStore);
+            $path = $this->changePathUploadLocal($path->getFilename());
             //move
 //            $request->file('thumbnail')->move(public_path('uploads'),$fileNameToStore);
 
@@ -253,8 +259,10 @@ class ProductController extends Controller
             // Filename to store
             $fileNameToStore = $filename.'-sticky-'.self::quickRandom().'.'.$extension;
             // Upload Image
-            $path = $request->file('file')->storeAs('public/uploads', $fileNameToStore);
-            $path = $this->changePathUpload($path);
+//            $path = $request->file('file')->storeAs('public/uploads', $fileNameToStore);
+//            $path = $this->changePathUpload($path);
+            $path = $request->file('file')->move(public_path().'/storage/uploads/', $fileNameToStore);
+            $path = $this->changePathUploadLocal($path->getFilename());
             //move
 //            $request->file('file')->move(public_path('uploads'),$fileNameToStore); //bỏ cái này vì nó sinh ra ở dòng trên rồi
             $arr_image = [];
@@ -274,6 +282,11 @@ class ProductController extends Controller
 
     protected function changePathUpload($path) { //chuyển về 1 file ở trong stoage/uploads vì nó đang bị sinh ra ở 2 nơi
         $path = str_replace('public/uploads', 'public/storage/uploads', $path);
+        return $path;
+    }
+
+    protected function changePathUploadLocal($path) { //dùng ở local
+        $path = 'public/storage/uploads/'.$path;
         return $path;
     }
 

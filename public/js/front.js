@@ -704,8 +704,8 @@ $("#btnUpdateRestorePassForm").click(function () {
 // })
 function orderProduct(e) {
     console.log('here');
-    console.log($(e).val());
-    $("#formFilterProduct").submit();
+    // console.log($(e).val());
+    // $("#filterForm").submit();
     // let slug = $(e).attr('data-category-slug');
     // let data = {
     //     order_type: $(e).val()

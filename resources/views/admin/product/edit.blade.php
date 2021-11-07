@@ -352,7 +352,7 @@
         var product_id = $("input[name='product_id']").val();
 
         var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-            url: 'https://dianaauthentic.com/admin/upload-images-dz', // Set the url
+            url: 'http://localhost/diana_authentic_dev/admin/upload-images-dz', // Set the url
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },

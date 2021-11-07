@@ -36,7 +36,7 @@
 <script>
     //--- textarea tinyMCE --------
     var editor_config = {
-        path_absolute : "https://dianaauthentic.com/",
+        path_absolute : "http://localhost/diana_authentic_dev/",
         selector: "textarea",
         plugins: [
             "advlist autolink lists link image charmap print preview hr anchor pagebreak",

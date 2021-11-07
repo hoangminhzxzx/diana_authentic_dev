@@ -1,4 +1,4 @@
-const url_source = 'https://dianaauthentic.com/admin';
+const url_source = 'http://localhost/diana_authentic_dev/admin';
 
 function confirmDelete(form_id) {
     Swal.fire({

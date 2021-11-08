@@ -10,6 +10,7 @@ body{
     display: flex;
     align-items: center;
     padding: 20px;
+    padding-bottom: 0px;
 }
 nav{
     flex: 1;
@@ -443,6 +444,10 @@ input:focus{
     .btn-submit-filter-mobile {
         display: block !important;
     }
+    .wp-search-all-product input {
+        /*width: 40% !important;*/
+        flex-basis: 70% !important;
+    }
 }
 
 /* --------cart-item------------ */
@@ -781,4 +786,58 @@ form a{
 }
 .wp-filter-product-mobile .box-filter {
     text-align: left;
+}
+
+.wp-search-all-product {
+    /*text-align: right;*/
+    padding-right: 20px;
+    display: flex;
+    justify-content: end;
+}
+.wp-search-all-product input {
+    /*width: 30%;*/
+    height: 30px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    flex-basis: 30%;
+}
+
+.result-search-diana {
+    /*border: 1px solid #ccc;*/
+    border-top: 0;
+    position: absolute;
+    top: 130px;
+    width: 369px; /*cái này thay đổi khi bắt ajax*/
+    background: #ffffff;
+}
+.result-search-diana ul {
+    padding: 1rem;
+    /*background: #ffffff;*/
+    max-height: 300px;
+    overflow: auto;
+}
+.result-search-diana ul li {
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    padding: 0.2rem;
+    /*background: #ccc;*/
+    margin-bottom: .5rem;
+}
+.result-search-diana ul li .item-link-search {
+    display: block;
+}
+.result-search-diana ul li:hover {
+    background: #fff5f5;
+}
+
+.item-box-search {
+    display: flex;
+}
+.item-box-search .info-item-search-diana p {
+    font-size: .8rem;
+}
+.item-box-search .info-item-search-diana span {
+    display: block;
+    font-size: .6rem;
 }

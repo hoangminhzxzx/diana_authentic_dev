@@ -2,6 +2,13 @@
 @section('title')
     {{ $category_title }}
 @endsection
+@section('search')
+    <div class="wp-search-all-product">
+        {{--            {{ dd(session()->get('search_diana')) }}--}}
+        <input type="text" placeholder="Tìm kiếm sản phẩm ..." id="header_input_search" oninput="searchDiana(this)" value="{{ session()->get('search_diana') }}">
+        <div class="result-search-diana"></div>
+    </div>
+@endsection
 @section('content')
     <div class="container">
         <div class="wp-list-product">

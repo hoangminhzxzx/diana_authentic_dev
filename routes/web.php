@@ -161,3 +161,4 @@ Route::get('/clear-cache', function() {
 	// dd($exitCode);
     // return 'DONE Storage Link'; //Return anything
 // });
+Route::get('/search-diana-authentic', 'Front\ProductController@searchDianaAuthentic')->name('client.search.diana.authentic');

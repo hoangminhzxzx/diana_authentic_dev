@@ -2,6 +2,13 @@
 @section('title')
     Trang chủ
 @endsection
+@section('search')
+    <div class="wp-search-all-product">
+        {{--            {{ dd(session()->get('search_diana')) }}--}}
+        <input type="text" placeholder="Tìm kiếm sản phẩm ..." id="header_input_search" oninput="searchDiana(this)" value="{{ session()->get('search_diana') }}">
+        <div class="result-search-diana"></div>
+    </div>
+@endsection
 @section('poster')
     <div class="row">
         <div class="col-2">

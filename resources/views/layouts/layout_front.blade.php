@@ -62,6 +62,7 @@
             </a>
             <img src="{{url('public/images/menu.png')}}" onclick="menutoggle()" class="menu-icon" alt="">
         </div>
+        @yield('search')
         @yield('poster')
     </div>
 </div>

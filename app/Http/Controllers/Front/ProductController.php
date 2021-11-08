@@ -11,6 +11,7 @@ use App\Model\ProductVariant;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 //use function GuzzleHttp\Promise\all;
 
@@ -67,7 +68,7 @@ class ProductController extends Controller
     public function chooseSize(Request $request) {
         $response = ['success' => false];
         $data = $request->input();
-		
+
         $product_variants = ProductVariant::query()->where('product_id', '=', $data['product_id'])->where('size_id', '=', $data['size_id'])
             ->where('is_out_stock', '=', 0)
             ->get();
@@ -245,5 +246,24 @@ class ProductController extends Controller
         } else {
             $response['mes'] = 'Kiểm tra lại dữ liệu';
         }
+    }
+
+    public function searchDianaAuthentic(Request $request) {
+        $res = ['success' => false];
+        $keyword = $request->query('keyword');
+        if ($keyword) {
+            $products = Product::query()->where('title', 'LIKE', '%'.$keyword.'%')->get();
+//        dd($products);
+            if ($products->count() > 0) {
+                $res['html'] = view('layouts.search_diana_ajax', ['products' => $products])->toHtml();
+                $res['success'] = true;
+
+//                $request->session()->put([
+//                    'search_diana' => $keyword
+//                ]);
+            }
+        }
+
+        return response()->json($res);
     }
 }

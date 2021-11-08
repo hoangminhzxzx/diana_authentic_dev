@@ -728,3 +728,41 @@ function orderProduct(e) {
     //     }
     // });
 }
+
+function searchDiana(e) {
+    let ele = $(e);
+    let keyword = ele.val();
+    let data = {
+        keyword : ele.val()
+    };
+
+    console.log(ele.width());
+    $(".result-search-diana").css('border-top', '0');
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: url_source+'/search-diana-authentic',
+        type: 'GET',
+        data: data,
+        dataType: 'json',
+        success: function (res) {
+            if ($(".result-search-diana ul")) {
+                $(".result-search-diana ul").remove();
+            }
+            if (res.success) {
+                // console.log($(".result-search-diana ul"));
+                $(".result-search-diana").append(res.html);
+                $(".result-search-diana").css('border-top', '1px solid #ccc');
+
+                $(".result-search-diana").css('width', (ele.width() + 22)+'px');
+            } else {
+                $(".result-search-diana").css('border-top', '0');
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}

@@ -841,3 +841,7 @@ form a{
     display: block;
     font-size: .6rem;
 }
+
+.parent-item-social {
+    display: inline-block;
+}

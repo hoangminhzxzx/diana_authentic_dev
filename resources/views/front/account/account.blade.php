@@ -24,7 +24,11 @@
 {{--                            <input type="submit" class="btn" value="Login">--}}
                             <button type="button" class="btn" id="btnLogin">Đăng nhập</button>
                             <a href="{{ route('client.restore.password') }}">Quên mật khẩu</a>
-                            <a href="{{ url('/login/facebook') }}">FACEBOOK</a>
+                            <div class="wp-social">
+                                <a href="{{ url('/login/facebook') }}" class="parent-item-social">
+                                    <img src="{{ url('/public/images/icon_facebook.png') }}" alt="" width="40" class="icon-social">
+                                </a>
+                            </div>
                         </form>
                         <form action="" id="RegForm">
                             <input type="text" name="username" placeholder="Username">

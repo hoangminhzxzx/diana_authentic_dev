@@ -30,4 +30,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => 'http://localhost/diana_authentic_dev/login/facebook/callback',
+//        'redirect' => 'https://localhost/diana_authentic_dev/login/facebook/callback',
+//        'redirect' => 'http://your-callback-url',
+    ],
+
 ];

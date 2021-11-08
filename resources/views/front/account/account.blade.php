@@ -24,6 +24,7 @@
 {{--                            <input type="submit" class="btn" value="Login">--}}
                             <button type="button" class="btn" id="btnLogin">Đăng nhập</button>
                             <a href="{{ route('client.restore.password') }}">Quên mật khẩu</a>
+                            <a href="{{ url('/login/facebook') }}">FACEBOOK</a>
                         </form>
                         <form action="" id="RegForm">
                             <input type="text" name="username" placeholder="Username">

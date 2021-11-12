@@ -397,9 +397,11 @@ function orderSubmit(e) {
             if (res.mess_error) {
                 let obj = res.mess_error;
                 $.each(obj, function(key, value) {
-                    let eleInput = $("#"+key);
-                    if (eleInput) {
-                        eleInput.addClass('error_required_order');
+                    if (key != 'email') {
+                        let eleInput = $("#"+key);
+                        if (eleInput) {
+                            eleInput.addClass('error_required_order');
+                        }
                     }
                 });
             }

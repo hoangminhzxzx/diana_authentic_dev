@@ -38,13 +38,13 @@ class OrderController extends Controller
             $order_master->customer_name = $data['name'];
             $order_master->customer_phone = $data['phone'];
             $order_master->address = $merge_address;
-            $order_master->email = $data['email'];
+            $order_master->email = $data['email'] ? $data['email'] : '';
             $order_master->note = (isset($data['note']) && $data['note']) ? $data['note'] : '';
             $order_master->status = 1; //status 1 : đặt hàng. 2 : hoàn thành, 3 : hủy
 
             $total_price = intval(str_replace('.', '', Cart::total()));
 			$total_price = intval(str_replace(',', '', Cart::total()));
-			
+
             $order_master->total_price = $total_price;
 
             //check xem có phải member Diana Authentic order hàng không
@@ -114,7 +114,7 @@ class OrderController extends Controller
         }
 
         foreach ($data as $key => $item) {
-            if (in_array($key, ['name', 'email', 'phone', 'province', 'district', 'wards'])) {
+            if (in_array($key, ['name', 'phone', 'province', 'district', 'wards'])) {
                 if ($item == null) {
                     $mess[$key] = 'Không được để trống';
                 }

@@ -90,7 +90,7 @@
                 <h3>Follow Us</h3>
                 <ul>
                     <li><a href="https://www.facebook.com/Khoidianaa" target="_blank">Facebook</a></li>
-                    <li><a href="https://www.instagram.com/diana.authentic/" target="_blank">instagram</a></li>
+                    <li><a href="https://www.instagram.com/diana.authentic/" target="_blank">Instagram</a></li>
                 </ul>
             </div>
         </div>

@@ -10,6 +10,7 @@ use App\Model\ProductVariant;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -59,6 +60,14 @@ class OrderController extends Controller
             $order_master->save();
 
             $data_items = Cart::content();
+
+            $details_send_mail = [
+                'customer_name' => $order_master->customer_name,
+                'address' => $order_master->address,
+                'customer_phone' => $order_master->customer_phone,
+                'email' => $order_master->email
+            ];
+
             foreach ($data_items as $item) {
                 //save order detail
                 $order_detail = new OrderDetail();
@@ -88,13 +97,36 @@ class OrderController extends Controller
                     }
                     $product_variant->save();
                 }
+
+                $details_send_mail['items'][] = [
+                    'thumbnail' => $product->thumbnail,
+                    'title' => $product->title,
+                    'price' => $order_detail->price,
+                    'qty' => $order_detail->qty,
+                    'slug' => $product->slug
+                ];
             }
+
+            $details_send_mail['total_bill'] = [
+                'total_price_pend' => $order_master->total_price,
+                'total_price_final' => $order_master->total_price
+            ];
 //            die();
 
             Cart::destroy();
             $response['success'] = true;
             $response['redirect'] = route('client.thank.you');
             $response['redirect_home'] = route('homeFront');
+//            dd($details_send_mail);
+            //send mail to client
+
+
+            if ($order_master->email) {
+                Mail::to($data['email'])->send(new \App\Mail\OrderSendClient($details_send_mail));
+            }
+
+//            die();
+
             return response()->json($response);
         }
     }

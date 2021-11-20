@@ -7,18 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class restartPasswordClient extends Mailable
+class OrderSendClient extends Mailable
 {
     use Queueable, SerializesModels;
-    public $details;
+    public $details_send_mail;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($details_send_mail)
     {
-        $this->details = $details;
+        $this->details_send_mail = $details_send_mail;
     }
 
     /**
@@ -30,6 +30,6 @@ class restartPasswordClient extends Mailable
     {
 //        return $this->view('view.name');
         return $this->subject('Mail from Diana Authentic')
-            ->view('emails.restart_password_client');
+            ->view('emails.order_send_client');
     }
 }

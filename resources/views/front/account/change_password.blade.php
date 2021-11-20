@@ -12,19 +12,29 @@
                     <a href=""><img src="" width="100%" alt=""></a>
                 </div>
                 <div class="col-2">
-                    <div class="form-container">
-                        <div class="form-btn">
-                            <span id="restart_password" style="width: 100% !important;">Đổi mật khẩu</span>
-                            <hr id="Indicator" style="width: 100% !important; transform: unset !important;">
+                    @if($account_client->is_fb == 0)
+                        <div class="form-container">
+                            <div class="form-btn">
+                                <span id="restart_password" style="width: 100% !important;">Đổi mật khẩu</span>
+                                <hr id="Indicator" style="width: 100% !important; transform: unset !important;">
+                            </div>
+                            <form action="" id="updateRestorePassForm" style="top: 80px;">
+                                <input type="hidden" id="hidden_info" data-account-client-id="{{ $account_client->id }}"
+                                       data-account-client-password="{{ $account_client->password }}"
+                                       data-account-client-email="{{ $account_client->email }}">
+                                <input type="password" name="password" placeholder="Password">
+                                <input type="password" name="confirm_password" placeholder="Confirm password">
+                                <button type="button" class="btn" id="btnUpdateRestorePassForm">Lưu</button>
+                                <span class="" id="span_error"
+                                      style="color: tomato; font-size: 12px; width: 100%;"></span>
+                            </form>
                         </div>
-                        <form action="" id="updateRestorePassForm" style="top: 80px;">
-                            <input type="hidden" id="hidden_info" data-account-client-id="{{ $account_client->id }}" data-account-client-password="{{ $account_client->password }}" data-account-client-email="{{ $account_client->email }}">
-                            <input type="password" name="password" placeholder="Password">
-                            <input type="password" name="confirm_password" placeholder="Confirm password">
-                            <button type="button" class="btn" id="btnUpdateRestorePassForm">Lưu</button>
-                            <span class="" id="span_error" style="color: tomato; font-size: 12px; width: 100%;"></span>
-                        </form>
-                    </div>
+                    @else
+                        <div style="text-align: center;">
+                            <img src="{{ asset('/public/nope_change_pass_diana.png') }}" alt="">
+{{--                            <a href="{{ route('homeFront') }}" class="btn">Về trang chủ !!!</a>--}}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

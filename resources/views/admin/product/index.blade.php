@@ -45,6 +45,7 @@
                                 <th>Tên sản phẩm</th>
                                 <th>Danh mục</th>
                                 <th>Trạng thái kích hoạt</th>
+                                <th>Giá</th>
                                 <th>Ngày tạo</th>
                                 <th>Lượt xem</th>
                                 <th>Hành động</th>
@@ -65,6 +66,7 @@
                                             <label class="custom-control-label" for="set-publish-{{ $product->id }}"></label>
                                         </div>
                                     </td>
+                                    <td>{{ number_format($product->price, 0, '.', '.') }}đ</td>
                                     <td>{{ substr($product->created_at, 0, 10) }}</td>
                                     <td>{{ number_format($product->total_view, 0, '.', '.') }}</td>
                                     <td>

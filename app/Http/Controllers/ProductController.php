@@ -48,7 +48,7 @@ class ProductController extends Controller
             ->when($sort_view, function (Builder $query, $sort_view) {
                 return $query->orderBy('total_view', $sort_view);
             })
-//            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(20);
         $categories = Category::all();
         return view('admin.product.index',

@@ -32,9 +32,9 @@
                         @enderror
 
                         <input type="email" name="email" placeholder="Email" id="email" value="{{ (isset($account_client) && $account_client) ? $account_client->email : '' }}">
-                        @error('email')
-                        <small class="text-danger">{{$message}}</small>
-                        @enderror
+{{--                        @error('email')--}}
+{{--                        <small class="text-danger">{{$message}}</small>--}}
+{{--                        @enderror--}}
 
                         <input type="number" name="phone" placeholder="Số điện thoại" id="phone" value="{{ (isset($account_client) && $account_client) ? $account_client->phone : '' }}">
                         @error('phone')

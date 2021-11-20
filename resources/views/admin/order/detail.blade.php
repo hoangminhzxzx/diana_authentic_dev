@@ -148,6 +148,7 @@
 {{--                    <th>Phone</th>--}}
 {{--                    <th>Email</th>--}}
                     <th>Tên sản phẩm</th>
+                    <th>Số lượng đặt hàng</th>
                     <th>Option</th>
                     <th>Ảnh sản phẩm</th>
                     <th>Giá</th>
@@ -161,6 +162,7 @@
 {{--                        <td>{{ $order_master->customer_phone }}</td>--}}
 {{--                        <td>{{ $order_master->email }}</td>--}}
                         <td><a href="{{ route('admin.product.edit', ['id' => $item->product_id]) }}" target="_blank"><b>{{ $item->product_title ? $item->product_title : '' }}</b></a></td>
+                        <td>{{ $item->qty }}</td>
                         <td>{{ $item->color }} - {{ $item->size }}</td>
                         <td><img src="{{ $item->product_thumbnail ? url($item->product_thumbnail) : '' }}" alt="" class="img-thumbnail" width="120"></td>
                         <td>{{ number_format($item->price, 0, '.', '.') }} VND</td>

@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Model\Front\AccountClient;
+use App\Model\Front\OrderDetail;
+use App\Model\Front\OrderMaster;
+use App\Model\ProductVariant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -171,6 +175,12 @@ class AccountController extends Controller
                 $data_response['provinces'] = $provinces;
                 $data_response['districts'] = $districts;
                 $data_response['wards'] = $wards;
+
+                //Lấy tất cả thông tin các Order mà hội viên này đã đặt hàng trên hệ thống
+                $order_master = OrderMaster::query()->where('from_member', '=', $info_account['id'])->get();
+                if ($order_master->count() > 0) {
+                    $data_response['orders_client'] = $order_master;
+                }
             }
             return view('front.account.detail', $data_response);
         } else {
@@ -239,5 +249,73 @@ class AccountController extends Controller
              //chưa login
              return redirect()->route('client.account.client')->with('status', 'Bạn chưa đăng nhập !');
          }
+     }
+
+     //Đợi làm view => dùng ajax gọi ra order detail rồi render ra hồ sơ của hội viên
+     public function renderOrderDetail(Request $request) {
+        $res = ['success' => false];
+        $order_id = intval($request->input('order_id'));
+        $order_details = OrderDetail::query()->where('order_id','=', $order_id)->get();
+        if ($order_details->count() > 0) {
+            $res['order_details'] = $order_details;
+            $res['success'] = true;
+        }
+        return response()->json($res);
+     }
+
+     public function cancleOrderMaster(Request $request) {
+        $res = ['success' => false];
+
+//        $account_client = AccountClient::query()->find($request->session()->get('client_login')->id);
+
+        $order_id = intval($request->input('order_id'));
+        $order_master = OrderMaster::query()->find($order_id);
+        if ($order_master) {
+            if (in_array($order_master->status, [3,4,5])) { //đang giao hàng, hoàn thành, hủy
+                $res['mess'] = 'Bạn không thể hủy đơn hàng này !';
+            } else {
+                $order_master->status = 5;
+                $order_master->save();
+
+                //Cộng số lượng sản phẩm mà khách đã hủy order vào kho lại
+                $this->plusQtyProduct($order_master->id);
+
+                $res['success'] = true;
+            }
+        } else {
+            $res['mess'] = 'Đã xảy ra lỗi !';
+        }
+
+        return response()->json($res);
+     }
+
+     private function plusQtyProduct($order_id) {
+        $order_details = OrderDetail::query()->where('order_id','=', $order_id)->get();
+        if ($order_details->count() > 0) {
+            foreach ($order_details as $order_detail) {
+                $product_variant = ProductVariant::query()->where('id', '=', $order_detail->product_variant_id)->first();
+                if ($product_variant) {
+                    $product_variant->qty = $product_variant->qty + $order_detail->qty;
+                    $product_variant->save();
+                }
+            }
+        }
+     }
+
+     public function hideOrderMaster(Request $request) {
+        $res = ['success' => false];
+        $order_id = intval($request->input('order_id'));
+        $order_master = OrderMaster::query()->find($order_id);
+
+        if ($order_master) {
+            if (in_array($order_master->status, [4,5])) { //order đã hoàn thành, order đã hủy
+                $order_master->is_show_client = 0;
+                $order_master->save();
+            } else {
+                $res['mess'] = 'Đơn hàng đang được xử lý, bạn không được ẩn đơn hàng !';
+            }
+        } else {
+            $res['mess'] = 'Đã xảy ra lỗi !';
+        }
      }
 }

@@ -143,6 +143,8 @@ Route::get('/cap-nhat-mat-khau/{key}/{reset}', 'MailController@updatePasswordNew
 Route::post('/restore-update-password', 'Front\AccountController@restoreUpdatePassword')->name('client.restore.update.password');
 Route::post('/tai-khoan/cap-nhap', 'Front\AccountController@updateAccountClient')->name('client.update.account');
 
+Route::post('/tai-khoan/ho-so/render-order-detail', 'Front\AccountController@renderOrderDetail')->name('client.render.order.detail');
+
 Route::get('/clear-cache', function() {
 	$exitCode = \Illuminate\Support\Facades\Artisan::call('cache:clear');
     $exitCode = \Illuminate\Support\Facades\Artisan::call('config:cache');

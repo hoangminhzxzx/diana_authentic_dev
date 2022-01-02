@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Front\AccountClient;
 use App\Model\Front\OrderDetail;
 use App\Model\Front\OrderMaster;
+use App\Model\Product;
 use App\Model\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -179,7 +180,7 @@ class AccountController extends Controller
                 //Lấy tất cả thông tin các Order mà hội viên này đã đặt hàng trên hệ thống
                 $order_master = OrderMaster::query()->where('from_member', '=', $info_account['id'])->get();
                 if ($order_master->count() > 0) {
-                    $data_response['orders_client'] = $order_master;
+                    $data_response['order_masters'] = $order_master;
                 }
             }
             return view('front.account.detail', $data_response);
@@ -257,9 +258,19 @@ class AccountController extends Controller
         $order_id = intval($request->input('order_id'));
         $order_details = OrderDetail::query()->where('order_id','=', $order_id)->get();
         if ($order_details->count() > 0) {
-            $res['order_details'] = $order_details;
-            $res['success'] = true;
+//            $res['order_details'] = $order_details;
+//            $res['success'] = true;
+            $productInfo = [];
+            foreach ($order_details as $order_detail) {
+                $productInfo[$order_detail->id] = [
+                    'color' => $order_detail->color,
+                    'size' => $order_detail->size,
+                    'price' => $order_detail->price,
+                    'product_info' => Product::query()->find($order_detail->product_id)
+                ];
+            }
         }
+        dd($productInfo);
         return response()->json($res);
      }
 

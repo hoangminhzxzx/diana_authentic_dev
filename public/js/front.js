@@ -768,3 +768,28 @@ function searchDiana(e) {
         }
     });
 }
+
+document.addEventListener('click', function (e) {
+    if(e.target.classList.contains('view-order-detail')) {
+        let order_id = e.target.getAttribute('data-order-id');
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url_source+'/tai-khoan/ho-so/render-order-detail',
+            type: 'POST',
+            data: {
+                order_id: order_id
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.success) {
+
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    }
+})

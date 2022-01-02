@@ -8,6 +8,12 @@
         .text-danger {
             color: red;
         }
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+        .wrapper-order-status {
+            align-self: flex-start;
+        }
     </style>
     <div class="small-container" style="min-height: 400px; margin-top: 80px;">
         <div class="info-client">
@@ -65,8 +71,80 @@
 
                         <button type="submit" class="btn">Lưu</button>
                     </div>
-                    <div class="col-3">
-{{--                        sau này thêm thắt cái gì ở đây --}}
+                    <div class="wrapper-order-status">
+                        <h3 class="mb-2">Trạng thái đơn hàng</h3>
+                        <div class="warpper">
+                            <input class="radio" id="one" name="group" type="radio" checked>
+                            <input class="radio" id="two" name="group" type="radio">
+                            <input class="radio" id="three" name="group" type="radio">
+                            <input class="radio" id="four" name="group" type="radio">
+                            <div class="tabs">
+                            <label class="tab" id="one-tab" for="one">Tất cả</label>
+                            <label class="tab" id="two-tab" for="two">Đặt hàng</label>
+                            <label class="tab" id="three-tab" for="three">Đang giao</label>
+                            <label class="tab" id="four-tab" for="four">Đã hủy</label>
+                              </div>
+                            <div class="panels">
+                            <div class="panel" id="one-panel">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Mã</th>
+                                            <th>Tổng bill</th>
+                                            <th>Trạng thái order</th>
+                                            <th>Thông tin</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($order_masters as $order_master)
+                                            <tr>
+                                                <td>{{ $order_master->order_code }}</td>
+                                                <td>{{ number_format($order_master->total_price, 0, '', '.') }}đ</td>
+                                                <td>
+                                                    @php
+                                                        switch ($order_master->status) {
+                                                            case 1:
+                                                                echo  'Đặt hàng';
+                                                                break;
+                                                            case 2:
+                                                                echo  'Check đơn';
+                                                                break;
+                                                            case 3:
+                                                                echo  'Đang giao hàng';
+                                                                break;
+                                                            case 4:
+                                                                echo  'Hoàn thành';
+                                                                break;
+                                                            case 5:
+                                                                echo  'Đã hủy';
+                                                                break;
+                                                        }
+                                                    @endphp
+                                                </td>
+                                                <td style="cursor: pointer;" class="view-order-detail" data-order-id="{{ $order_master->id }}">Xem chi tiết</td>
+                                                @if(in_array($order_master->status, [1,2]))
+                                                    <td>Cancle</td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="panel" id="two-panel">
+                              <div class="panel-title">Take-Away Skills</div>
+                              <p>You will learn many aspects of styling web pages! You’ll be able to set up the correct file structure, edit text and colors, and create attractive layouts. With these skills, you’ll be able to customize the appearance of your web pages to suit your every need!</p>
+                            </div>
+                            <div class="panel" id="three-panel">
+                              <div class="panel-title">Note on Prerequisites</div>
+                              <p>We recommend that you complete Learn HTML before learning CSS.</p>
+                            </div>
+                            <div class="panel" id="four-panel">
+                                <div class="panel-title">Note on Prerequisites</div>
+                                <p>We recommend that you complete Learn HTML before learning CSS.</p>
+                              </div>
+                            </div>
+                          </div>
                     </div>
                 </div>
             </form>
